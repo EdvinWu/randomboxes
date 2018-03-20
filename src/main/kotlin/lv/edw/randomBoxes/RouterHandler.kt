@@ -29,8 +29,7 @@ class RouterHandler(val jwtTokenService: JwtTokenService,
 
     fun reg(req: ServerRequest): Mono<ServerResponse> {
         return ServerResponse.ok().body(req.bodyToMono(UserCreationModel::class.java)
-                .map({ userService.createUser(it) }))
-                .toMono()
+                .flatMap { userService.createUser(it).map { AuthenticatedRes(it.userId) } })
     }
 }
 

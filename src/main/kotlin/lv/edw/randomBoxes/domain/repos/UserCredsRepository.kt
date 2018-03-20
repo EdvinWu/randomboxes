@@ -1,12 +1,12 @@
 package lv.edw.randomBoxes.domain.repos
 
-import org.springframework.data.repository.CrudRepository
+import lv.edw.randomBoxes.domain.UserCreds
+import org.springframework.data.mongodb.repository.ReactiveMongoRepository
 import org.springframework.security.core.userdetails.UserDetails
-import org.springframework.stereotype.Repository
+import reactor.core.publisher.Mono
 
-@Repository
-interface UserCredsRepository : CrudRepository<UserCreds, String> {
+interface UserCredsRepository : ReactiveMongoRepository<UserCreds, String> {
 
-    fun findByUserId(userId: String): UserDetails
-    fun countByUserId(id: String): Int
+    fun findByUserId(userId: String): Mono<UserDetails>
+    fun countByUserId(id: String): Mono<Long>
 }

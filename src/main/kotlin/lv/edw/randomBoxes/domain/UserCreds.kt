@@ -1,23 +1,21 @@
-package lv.edw.randomBoxes.domain.repos
+package lv.edw.randomBoxes.domain
 
-import lv.edw.randomBoxes.domain.ApplicationRole
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
-import java.util.*
-import javax.persistence.Entity
-import javax.persistence.Id
 
-@Entity
+@Document
 data class UserCreds(@Id val userId: String,
                      val email: String,
                      val pwd: String,
                      val expired: Boolean,
                      val enabled: Boolean,
                      val locked: Boolean,
-                     val role: ApplicationRole
+                     val roles: MutableCollection<ApplicationRole>
 ) : UserDetails {
 
-    override fun getAuthorities(): MutableCollection<out GrantedAuthority> = Arrays.asList(role)
+    override fun getAuthorities(): MutableCollection<out GrantedAuthority> = roles
 
     override fun isEnabled(): Boolean = enabled
 

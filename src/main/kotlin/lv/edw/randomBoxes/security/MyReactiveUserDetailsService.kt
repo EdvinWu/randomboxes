@@ -11,7 +11,7 @@ class MyReactiveUserDetailsService(private val userRepo: UserCredsRepository) : 
 
     override fun findByUsername(username: String?): Mono<UserDetails> {
         if (username != null) {
-            return Mono.just(userRepo.findByUserId(username))
+            return userRepo.findByUserId(username)
         }
         throw RuntimeException("cannot call on user w/o user id")
     }

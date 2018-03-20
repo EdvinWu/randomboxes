@@ -25,7 +25,8 @@ class JwtTokenService(@Value("\${jwt.secret}") private val secret: String,
 
     private fun isValidCredentials(authModel: AuthModel): Boolean {
         val userCreds = userCredsRepository.findByUserId(authModel.userId)
-        if (myPasswordEncoder.matches(authModel.password, userCreds.password)) {
+        val encodedPassword = userCreds.block()?.password
+        if (myPasswordEncoder.matches(authModel.password, encodedPassword)) {
             return true
         }
         return false

@@ -1,7 +1,6 @@
 package lv.edw.randomBoxes.domain.repos
 
-import org.springframework.data.repository.CrudRepository
-import org.springframework.stereotype.Repository
+import lv.edw.randomBoxes.domain.UserInfo
+import org.springframework.data.mongodb.repository.ReactiveMongoRepository
 
-@Repository
-interface UserRepository : CrudRepository<UserInfo, String>
+interface UserRepository : ReactiveMongoRepository<UserInfo, String>

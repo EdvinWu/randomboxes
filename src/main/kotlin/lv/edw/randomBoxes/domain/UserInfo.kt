@@ -1,10 +1,10 @@
-package lv.edw.randomBoxes.domain.repos
+package lv.edw.randomBoxes.domain
 
 import lv.edw.randomBoxes.model.Gender
-import javax.persistence.Entity
-import javax.persistence.Id
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.mapping.Document
 
-@Entity
+@Document
 data class UserInfo(@Id val userId: String,
                     val firstName: String?,
                     val lastName: String?,
